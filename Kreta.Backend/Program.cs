@@ -1,3 +1,4 @@
+using Kreta.Backend.Context;
 using Kreta.Backend.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -12,6 +13,15 @@ builder.Services.AddSwaggerGen();
 builder.Services.ConfigureCors();
 
 var app = builder.Build();
+
+// InMemory database data
+using (var scope = app.Services.CreateAsyncScope())
+{
+    var dbContext = scope.ServiceProvider.GetRequiredService<KretaInMemoryContext>();
+
+    // InMemory test data
+    dbContext.Database.EnsureCreated();
+}
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
