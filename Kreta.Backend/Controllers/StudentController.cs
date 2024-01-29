@@ -1,4 +1,5 @@
 ﻿using Kreta.Backend.Datas.Entities;
+using Kreta.Backend.Datas.Responses;
 using Kreta.Backend.Repos;
 using Microsoft.AspNetCore.Mvc;
 
@@ -49,8 +50,21 @@ namespace Kreta.Backend.Controllers
         [HttpPut]
         public async Task<IActionResult> UpdateStudentAsync(Student student)
         {
-            ControllerRespose response = new ControllerRespose();
-            return Ok(response);
+            ControllerResponse response = new ControllerResponse();
+            if (_studentRepo is not null)
+            {
+                response = await _studentRepo.UpdateAsync(student);
+                if (response.HasError)
+                {
+                    return BadRequest(response);
+                }
+                else
+                {
+                    return Ok(response);
+                }
+            }
+            response.ClearAndAddError("Az adatok frissítés nem lehetséges!");
+            return BadRequest(response);
         }
     }
 }
