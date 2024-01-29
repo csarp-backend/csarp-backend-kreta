@@ -45,5 +45,12 @@ namespace Kreta.Backend.Controllers
             }
             return BadRequest("Diák keresése nem működik!");
         }
+
+        [HttpPut]
+        public async Task<IActionResult> UpdateStudentAsync(Student student)
+        {
+            ControllerRespose response = new ControllerRespose();
+            return Ok(response);
+        }
     }
 }
