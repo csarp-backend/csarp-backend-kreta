@@ -1,5 +1,7 @@
 ﻿using Kreta.Backend.Datas.Entities;
 using Kreta.Backend.Repos;
+using Kreta.Shared.Dtos;
+using Kreta.Shared.Extensions;
 using Kreta.Shared.Responses;
 using Microsoft.AspNetCore.Mvc;
 
@@ -18,26 +20,27 @@ namespace Kreta.Backend.Controllers
         [HttpGet]
         public async Task<IActionResult> SelectStudentAsync()
         {
-            List<Student> students = new List<Student>();
+            List<StudentDto> studentsDtos = new List<StudentDto>();
             if (_studentRepo is not null)
             {
-                students = await _studentRepo.SelectStudentAsync();
-                return Ok(students);
+                List<Student> students = await _studentRepo.SelectStudentAsync();
+                studentsDtos = students.Select(student => student.ToDto()).ToList();
+                return Ok(studentsDtos);
             }
-            //return BadRequest(students);
             return BadRequest("A diákadatok lekérése sikertelen!");
         }
 
         [HttpGet("{id}")]
         public async Task<IActionResult> GetByIdAsync(Guid id)
         {
-            Student? entity = new Student();
+            StudentDto? entityDto = new StudentDto();
             if (_studentRepo is not null)
             {
-                entity = await _studentRepo.GetByIdAsync(id);
-                if (entity != null)
+                Student? resultStudent = await _studentRepo.GetByIdAsync(id);
+                if (resultStudent != null)
                 {
-                    return Ok(entity);
+                    entityDto = resultStudent.ToDto();
+                    return Ok(entityDto);
                 }
                 else
                 {
@@ -48,12 +51,12 @@ namespace Kreta.Backend.Controllers
         }
 
         [HttpPut]
-        public async Task<IActionResult> UpdateStudentAsync(Student student)
+        public async Task<IActionResult> UpdateStudentAsync(StudentDto student)
         {
             ControllerResponse response = new ControllerResponse();
             if (_studentRepo is not null)
             {
-                response = await _studentRepo.UpdateAsync(student);
+                response = await _studentRepo.UpdateAsync(student.DtoToStuden());
                 if (response.HasError)
                 {
                     return BadRequest(response);
