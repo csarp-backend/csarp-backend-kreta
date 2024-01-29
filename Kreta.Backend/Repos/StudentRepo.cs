@@ -1,5 +1,6 @@
 ﻿using Kreta.Backend.Context;
 using Kreta.Backend.Datas.Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace Kreta.Backend.Repos
 {
@@ -15,9 +16,9 @@ namespace Kreta.Backend.Repos
             throw new NotImplementedException();
         }
 
-        public Task<List<Student>> SelectStudentAsync()
+        public async Task<List<Student>> SelectStudentAsync()
         {
-            throw new NotImplementedException();
+            return await _dbContext.Students.ToListAsync();
         }
     }
 }
