@@ -1,4 +1,6 @@
-﻿namespace Kreta.Backend.Datas.Entities
+﻿using Kreta.Backend.Datas.Enums;
+
+namespace Kreta.Backend.Datas.Entities
 {
     public class Student
     {
@@ -52,3 +54,4 @@
             return $"{LastName} {FirstName} ({SchoolYear}.{SchoolClass}), Szül: ({String.Format("{0:yyyy.MM.dd.}", BirthsDay)}), Tanulmányi szint: ({EducationLevel})";
         }
     }
+}
