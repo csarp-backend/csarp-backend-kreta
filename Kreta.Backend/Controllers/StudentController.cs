@@ -11,7 +11,7 @@ namespace Kreta.Backend.Controllers
         private readonly IStudentRepo _studentRepo;
         public StudentController(IStudentRepo studentRepo)
         {
-            _studentRepo = studentRepo;
+            _studentRepo = studentRepo ?? throw new ArgumentException("Student repo nem létrezik");
         }
 
         [HttpGet]
