@@ -13,6 +13,8 @@ builder.Services.AddSwaggerGen();
 builder.Services.ConfigureCors();
 // InMemory context kofigurálása
 builder.Services.ConfigureInMemoryContext();
+// Repo konfigurálás
+builder.Services.ConfigureRepoService();
 
 var app = builder.Build();
 
