@@ -33,9 +33,11 @@ namespace Kreta.Backend.Repos
             }
             catch (Exception ex)
             {
-                
-            }
+                response.AppendNewError(ex.Message);
+                response.AppendNewError($"{nameof(StudentRepo)} osztály, {nameof(UpdateAsync)} metódusban hiba keletkezett");
+                response.AppendNewError($"{student} frissítése nem sikerült!");
 
+            }
             return response;
         }
     }
