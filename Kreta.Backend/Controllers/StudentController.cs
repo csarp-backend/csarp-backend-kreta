@@ -18,14 +18,32 @@ namespace Kreta.Backend.Controllers
         public async Task<IActionResult> SelectStudentAsync()
         {
             List<Student> students = new List<Student>();
-            if (students is null)
+            if (_studentRepo is not null)
             {
-                students= await _studentRepo.SelectStudentAsync();
+                students = await _studentRepo.SelectStudentAsync();
                 return Ok(students);
             }
             //return BadRequest(students);
-            return BadRequest("A diákadatok lekérése sikertelen");
+            return BadRequest("A diákadatok lekérése sikertelen!");
+        }
 
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetByIdAsync(Guid id)
+        {
+            Student? entity = new Student();
+            if (_studentRepo is not null)
+            {
+                entity = await _studentRepo.GetByIdAsync(id);
+                if (entity != null)
+                {
+                    return Ok(entity);
+                }
+                else
+                {
+                    return BadRequest("A keresett diák nem található!");
+                }
+            }
+            return BadRequest("Diák keresése nem működik!");
         }
     }
 }
