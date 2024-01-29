@@ -1,4 +1,4 @@
-﻿namespace Kreta.Backend.Datas.Responses
+﻿namespace Kreta.Shared.Responses
 {
     public class ControllerResponse : ErrorStore
     {
