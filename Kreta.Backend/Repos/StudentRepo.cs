@@ -11,9 +11,9 @@ namespace Kreta.Backend.Repos
         {            
             _dbContext = dbContext;
         }
-        public Task<Student> GetByIdAsync(Guid id)
+        public async Task<Student?> GetByIdAsync(Guid id)
         {
-            throw new NotImplementedException();
+            return await _dbContext.Students.FirstOrDefaultAsync(student => student.Id == id);
         }
 
         public async Task<List<Student>> SelectStudentAsync()
