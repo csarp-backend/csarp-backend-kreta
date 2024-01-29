@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Kreta.Backend.Repos;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Kreta.Backend.Controllers
 {
@@ -6,5 +7,10 @@ namespace Kreta.Backend.Controllers
     [Route("api/[controller]")]
     public class StudentController : ControllerBase
     {
+        private readonly IStudentRepo _studentRepo;
+        public StudentController(IStudentRepo studentRepo)
+        {
+            _studentRepo = studentRepo;
+        }
     }
 }

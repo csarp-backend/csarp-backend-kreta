@@ -1,4 +1,5 @@
 ﻿using Kreta.Backend.Context;
+using Kreta.Backend.Repos;
 using Microsoft.EntityFrameworkCore;
 
 namespace Kreta.Backend.Extensions
@@ -29,6 +30,11 @@ namespace Kreta.Backend.Extensions
                  ServiceLifetime.Scoped,
                  ServiceLifetime.Scoped
             );
+        }
+
+        public static void ConfigureRepoService(this IServiceCollection services)
+        {
+            services.AddScoped<IStudentRepo, StudentRepo>();
         }
     }
 }
