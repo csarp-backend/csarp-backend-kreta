@@ -1,4 +1,7 @@
-﻿namespace Kreta.Backend.Extensions
+﻿using Kreta.Backend.Context;
+using Microsoft.EntityFrameworkCore;
+
+namespace Kreta.Backend.Extensions
 {
     public static class KretaBackendExtensions
     {
@@ -14,6 +17,17 @@
                          .AllowAnyMethod();
                      }
                  )
+            );
+        }
+
+        public static void ConfigureInMemoryContext(this IServiceCollection services)
+        {
+            string dbNameInMemoryContext = "Kreta" + Guid.NewGuid();
+            services.AddDbContext<KretaInMemoryContext>
+            (
+                 options => options.UseInMemoryDatabase(databaseName: dbNameInMemoryContext),
+                 ServiceLifetime.Scoped,
+                 ServiceLifetime.Scoped
             );
         }
     }

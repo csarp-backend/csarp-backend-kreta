@@ -11,6 +11,8 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 // Cors
 builder.Services.ConfigureCors();
+// InMemory context kofigurálása
+builder.Services.ConfigureInMemoryContext();
 
 var app = builder.Build();
 
