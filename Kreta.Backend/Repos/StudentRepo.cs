@@ -1,6 +1,6 @@
 ﻿using Kreta.Backend.Context;
 using Kreta.Backend.Datas.Entities;
-using Kreta.Backend.Datas.Responses;
+using Kreta.Shared.Responses;
 using Microsoft.EntityFrameworkCore;
 
 namespace Kreta.Backend.Repos

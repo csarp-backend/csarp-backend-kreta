@@ -1,5 +1,5 @@
 ﻿using Kreta.Backend.Datas.Entities;
-using Kreta.Backend.Datas.Enums;
+using Kreta.Shared.Models.SchoolCitizens;
 using Microsoft.EntityFrameworkCore;
 
 namespace Kreta.Backend.Context

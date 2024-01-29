@@ -1,6 +1,6 @@
 ﻿using Kreta.Backend.Datas.Entities;
-using Kreta.Backend.Datas.Responses;
 using Kreta.Backend.Repos;
+using Kreta.Shared.Responses;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Kreta.Backend.Controllers

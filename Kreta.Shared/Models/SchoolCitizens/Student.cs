@@ -1,4 +1,4 @@
-﻿using Kreta.Shared.Models.SchoolCitizens
+﻿using Kreta.Shared.Models.SchoolCitizens;
 
 namespace Kreta.Backend.Datas.Entities
 {

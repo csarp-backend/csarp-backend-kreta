@@ -1,5 +1,5 @@
 ﻿using Kreta.Backend.Datas.Entities;
-using Kreta.Backend.Datas.Responses;
+using Kreta.Shared.Responses;
 
 namespace Kreta.Backend.Repos
 {

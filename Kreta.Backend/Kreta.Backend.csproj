@@ -17,4 +17,8 @@
     <Folder Include="Datas\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Kreta.Shared\Kreta.Shared.csproj" />
+  </ItemGroup>
+
 </Project>
