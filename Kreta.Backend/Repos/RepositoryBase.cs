@@ -20,17 +20,20 @@ namespace Kreta.Backend.Repos
             // Itt megkapjuk az adatábzis táblát
             _dbSet = dbContext.Set<TEntity>();
         }
+        public IQueryable<TEntity> FindAll()
+        {
+            if (_dbSet is null)
+            {
+                return Enumerable.Empty<TEntity>().AsQueryable().AsNoTracking();
+            }
+            return _dbSet.AsNoTracking();
+        }
         public void Create(TEntity entity)
         {
             throw new NotImplementedException();
         }
 
         public void Delete(TEntity entity)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IQueryable<TEntity> FindAll()
         {
             throw new NotImplementedException();
         }
