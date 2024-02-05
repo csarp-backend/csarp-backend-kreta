@@ -52,7 +52,12 @@ namespace Kreta.Backend.Repos
                 response.AppendNewError($"{id} idével rendelkező diák nem található!");
                 response.AppendNewError("A diák törlése nem sikerült!");
             }
-
+            else
+            {
+                _dbContext.ChangeTracker.Clear();
+                _dbContext.Entry(studentToDelete).State = EntityState.Deleted;
+                await _dbContext.SaveChangesAsync();
+            }
             return response;
         }
     }
