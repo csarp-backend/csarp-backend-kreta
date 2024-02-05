@@ -3,7 +3,7 @@ using Kreta.Shared.Responses;
 
 namespace Kreta.Backend.Repos
 {
-    public interface IStudentRepo
+    public interface IStudent2Repo
     {
         Task<List<Student>> SelectStudentAsync();
         Task<Student?> GetByIdAsync(Guid id);

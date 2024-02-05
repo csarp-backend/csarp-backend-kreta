@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Kreta.Backend.Repos
 {
-    public class Student2Repo : IStudentRepo
+    public class Student2Repo : IStudent2Repo
     {
         private readonly KretaInMemoryContext _dbContext;
         public Student2Repo(KretaInMemoryContext dbContext)
