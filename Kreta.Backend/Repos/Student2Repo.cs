@@ -1,5 +1,5 @@
 ﻿using Kreta.Backend.Context;
-using Kreta.Backend.Datas.Entities;
+using Kreta.Shared.Models.SchoolCitizens;
 using Kreta.Shared.Responses;
 using Microsoft.EntityFrameworkCore;
 

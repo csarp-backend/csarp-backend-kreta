@@ -1,9 +1,10 @@
-﻿using Kreta.Backend.Datas.Entities;
-using Kreta.Backend.Repos;
+﻿using Kreta.Backend.Repos;
 using Kreta.Shared.Dtos;
 using Kreta.Shared.Extensions;
+using Kreta.Shared.Models.SchoolCitizens;
 using Kreta.Shared.Responses;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace Kreta.Backend.Controllers
 {
@@ -11,8 +12,8 @@ namespace Kreta.Backend.Controllers
     [Route("api/[controller]")]
     public class StudentController : ControllerBase
     {
-        private readonly IStudent2Repo _studentRepo;
-        public StudentController(IStudent2Repo studentRepo)
+        private readonly IStudentRepo _studentRepo;
+        public StudentController(IStudentRepo studentRepo)
         {
             _studentRepo = studentRepo ?? throw new ArgumentException("Student repo nem létrezik");
         }
@@ -23,7 +24,7 @@ namespace Kreta.Backend.Controllers
             List<StudentDto> studentsDtos = new List<StudentDto>();
             if (_studentRepo is not null)
             {
-                List<Student> students = await _studentRepo.SelectStudentAsync();
+                List<Student> students = await _studentRepo.FindAll().ToListAsync();
                 studentsDtos = students.Select(student => student.ToDto()).ToList();
                 return Ok(studentsDtos);
             }
@@ -36,7 +37,7 @@ namespace Kreta.Backend.Controllers
             StudentDto? entityDto = new StudentDto();
             if (_studentRepo is not null)
             {
-                Student? resultStudent = await _studentRepo.GetByIdAsync(id);
+                Student? resultStudent = await _studentRepo.FindByCondition(student => student.Id==id).FirstOrDefaultAsync();
                 if (resultStudent != null)
                 {
                     entityDto = resultStudent.ToDto();
