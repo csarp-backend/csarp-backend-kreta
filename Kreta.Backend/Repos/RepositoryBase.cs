@@ -55,15 +55,43 @@ namespace Kreta.Backend.Repos
             }
             return response;
         }
-
+        public async Task<ControllerResponse> DeleteAsync(TEntity entity)
+        {
+            ControllerResponse response = new ControllerResponse();
+            
+            TEntity? entityToDelete = FindByCondition(e => e.Id==entity.Id).FirstOrDefault();
+            
+            if (entity is null || (entityToDelete is not null && !entityToDelete.HasId))
+            {
+                response.AppendNewError($"{entity.Id} idével rendelkező entitás nem található!");
+                response.AppendNewError("Az entitás törlése nem sikerült!");
+            }
+            else
+            {
+                try
+                {
+                    if (entityToDelete is not null)
+                    {
+                        _dbContext.ChangeTracker.Clear();
+                        _dbContext.Entry(entityToDelete).State = EntityState.Deleted;
+                        await _dbContext.SaveChangesAsync();
+                    }
+                }
+                catch (Exception e)
+                {
+                    response.AppendNewError(e.Message);
+                    response.AppendNewError($"{nameof(RepositoryBase<TDbContext, TEntity>)} osztály, {nameof(DeleteAsync)} metódusban hiba keletkezett");
+                    response.AppendNewError($"Az entitás id:{entity.Id}");
+                    response.AppendNewError($"Az entitás törlése nem sikerült!");
+                }
+            }
+            return response;
+        }
         public Task<ControllerResponse> CreateAsync(TEntity entity)
         {
             throw new NotImplementedException();
         }
 
-        public Task<ControllerResponse> DeleteAsync(TEntity entity)
-        {
-            throw new NotImplementedException();
-        }
+
     }
 }
