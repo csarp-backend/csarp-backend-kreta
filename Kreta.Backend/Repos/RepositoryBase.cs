@@ -1,10 +1,11 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Kreta.Shared.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace Kreta.Backend.Repos
 {
-    public class RepositoryBase<TDbContext, TEntity> : IRepositoryBase<TEntity>
+    public abstract class RepositoryBase<TDbContext, TEntity> : IRepositoryBase<TEntity>
         where TDbContext: DbContext
-        where TEntity : class
+        where TEntity : class, IDbEntity<TEntity>, new()
     {
 
     }
