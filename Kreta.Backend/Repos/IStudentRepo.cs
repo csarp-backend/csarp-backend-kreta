@@ -8,5 +8,6 @@ namespace Kreta.Backend.Repos
         Task<List<Student>> SelectStudentAsync();
         Task<Student?> GetByIdAsync(Guid id);
         Task<ControllerResponse> UpdateAsync(Student student);
+        Task<ControllerResponse> DeleteStudentAsync(Guid id);
     }
 }
