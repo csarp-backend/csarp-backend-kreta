@@ -87,9 +87,28 @@ namespace Kreta.Backend.Repos
             }
             return response;
         }
-        public Task<ControllerResponse> CreateAsync(TEntity entity)
+        public async Task<ControllerResponse> CreateAsync(TEntity entity)
         {
-            throw new NotImplementedException();
+            ControllerResponse response = new ControllerResponse();
+            if (_dbSet is null)
+            {
+                response.AppendNewError($"{entity} osztály hozzáadása az adatbázishoz nem sikerült!");
+            }
+            else
+            {
+                try
+                {
+                    _dbSet.Add(entity);
+                    await _dbContext.SaveChangesAsync();
+                }
+                catch (Exception e)
+                {
+                    response.AppendNewError(e.Message);
+                    response.AppendNewError($"{nameof(RepositoryBase<TDbContext, TEntity>)} osztály, {nameof(CreateAsync)} metódusban hiba keletkezett");
+                    response.AppendNewError($"{entity} osztály hozzáadása az adatbázishoz nem sikerült!");
+                }
+            }
+            return response;
         }
 
 
