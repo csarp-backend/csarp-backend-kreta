@@ -60,5 +60,17 @@ namespace Kreta.Backend.Repos
             }
             return response;
         }
+
+        public async Task<ControllerResponse> InsertStudentAsync(Student student)
+        {
+            if (student.HasId)
+            {
+                return await UpdateAsync(student);
+            }
+            else
+            {
+                return await InsertNewItemAsync(student);
+            }
+        }
     }
 }
