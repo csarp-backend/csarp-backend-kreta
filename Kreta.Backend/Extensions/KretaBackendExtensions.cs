@@ -34,7 +34,7 @@ namespace Kreta.Backend.Extensions
 
         public static void ConfigureRepoService(this IServiceCollection services)
         {
-            services.AddScoped<IStudentRepo, StudentRepo>();
+            services.AddScoped<IStudentRepo, Student2Repo>();
         }
     }
 }

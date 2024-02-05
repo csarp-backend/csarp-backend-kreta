@@ -5,10 +5,10 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Kreta.Backend.Repos
 {
-    public class StudentRepo : IStudentRepo
+    public class Student2Repo : IStudentRepo
     {
         private readonly KretaInMemoryContext _dbContext;
-        public StudentRepo(KretaInMemoryContext dbContext)
+        public Student2Repo(KretaInMemoryContext dbContext)
         {            
             _dbContext = dbContext;
         }
@@ -35,7 +35,7 @@ namespace Kreta.Backend.Repos
             catch (Exception ex)
             {
                 response.AppendNewError(ex.Message);
-                response.AppendNewError($"{nameof(StudentRepo)} osztály, {nameof(UpdateAsync)} metódusban hiba keletkezett");
+                response.AppendNewError($"{nameof(Student2Repo)} osztály, {nameof(UpdateAsync)} metódusban hiba keletkezett");
                 response.AppendNewError($"{student} frissítése nem sikerült!");
 
             }
@@ -84,7 +84,7 @@ namespace Kreta.Backend.Repos
             catch (Exception e)
             {
                 response.AppendNewError(e.Message);
-                response.AppendNewError($"{nameof(StudentRepo)} osztály, {nameof(InsertNewItemAsync)} metódusban hiba keletkezett");
+                response.AppendNewError($"{nameof(Student2Repo)} osztály, {nameof(InsertNewItemAsync)} metódusban hiba keletkezett");
                 response.AppendNewError($"{student} osztály hozzáadása az adatbázishoz nem sikerült!");
             }
             return response;
