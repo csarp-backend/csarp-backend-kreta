@@ -12,6 +12,7 @@ namespace Kreta.Backend.Repos
         {            
             _dbContext = dbContext;
         }
+
         public async Task<Student?> GetByIdAsync(Guid id)
         {
             return await _dbContext.Students.FirstOrDefaultAsync(student => student.Id == id);
@@ -38,6 +39,20 @@ namespace Kreta.Backend.Repos
                 response.AppendNewError($"{student} frissítése nem sikerült!");
 
             }
+            return response;
+        }
+
+        public async Task<ControllerResponse> DeleteStudentAsync(Guid id)
+        {
+            ControllerResponse response = new ControllerResponse();
+            
+            Student? studentToDelete = await GetByIdAsync(id);
+            if (studentToDelete == null || studentToDelete == default)
+            {
+                response.AppendNewError($"{id} idével rendelkező diák nem található!");
+                response.AppendNewError("A diák törlése nem sikerült!");
+            }
+
             return response;
         }
     }
