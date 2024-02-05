@@ -28,17 +28,21 @@ namespace Kreta.Backend.Repos
             }
             return _dbSet.AsNoTracking();
         }
+        public IQueryable<TEntity> FindByCondition(Expression<Func<TEntity, bool>> expression)
+        {
+            if (_dbSet is null)
+            {
+                return Enumerable.Empty<TEntity>().AsQueryable().AsNoTracking();
+            }
+            return _dbSet.Where(expression).AsNoTracking();
+        }
+
         public void Create(TEntity entity)
         {
             throw new NotImplementedException();
         }
 
         public void Delete(TEntity entity)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IQueryable<TEntity> FindByCondition(Expression<Func<TEntity, bool>> expression)
         {
             throw new NotImplementedException();
         }
