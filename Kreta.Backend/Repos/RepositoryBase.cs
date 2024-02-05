@@ -1,4 +1,5 @@
 ﻿using Kreta.Shared.Models;
+using Kreta.Shared.Responses;
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
 
@@ -36,18 +37,31 @@ namespace Kreta.Backend.Repos
             }
             return _dbSet.Where(expression).AsNoTracking();
         }
+        public async Task<ControllerResponse> UpdateAsync(TEntity entity)
+        {
+            ControllerResponse response = new ControllerResponse();
+            try
+            {
+                _dbContext.ChangeTracker.Clear();
+                _dbContext.Entry(entity).State = EntityState.Modified;
+                await _dbContext.SaveChangesAsync();
+            }
+            catch (Exception e)
+            {
+                response.AppendNewError(e.Message);
+                response.AppendNewError($"{nameof(RepositoryBase<TDbContext, TEntity>)} osztály, {nameof(UpdateAsync)} metódusban hiba keletkezett");
+                response.AppendNewError($"{entity} frissítése nem sikerült!");
 
-        public void Create(TEntity entity)
+            }
+            return response;
+        }
+
+        public Task<ControllerResponse> CreateAsync(TEntity entity)
         {
             throw new NotImplementedException();
         }
 
-        public void Delete(TEntity entity)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Update(TEntity entity)
+        public Task<ControllerResponse> DeleteAsync(TEntity entity)
         {
             throw new NotImplementedException();
         }

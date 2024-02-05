@@ -1,4 +1,5 @@
-﻿using System.Linq.Expressions;
+﻿using Kreta.Shared.Responses;
+using System.Linq.Expressions;
 
 namespace Kreta.Backend.Repos
 {
@@ -6,8 +7,8 @@ namespace Kreta.Backend.Repos
     {
         IQueryable<T> FindAll();
         IQueryable<T> FindByCondition(Expression<Func<T, bool>> expression);
-        void Create(T entity);
-        void Update(T entity);
-        void Delete(T entity);
+        Task<ControllerResponse> CreateAsync(T entity);
+        Task<ControllerResponse> UpdateAsync(T entity);
+        Task<ControllerResponse> DeleteAsync(T entity);
     }
 }
