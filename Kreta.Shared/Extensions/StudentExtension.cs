@@ -1,5 +1,5 @@
-﻿using Kreta.Backend.Datas.Entities;
-using Kreta.Shared.Dtos;
+﻿using Kreta.Shared.Dtos;
+using Kreta.Shared.Models.SchoolCitizens;
 
 namespace Kreta.Shared.Extensions
 {

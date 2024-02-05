@@ -1,8 +1,6 @@
-﻿using Kreta.Shared.Models.SchoolCitizens;
-
-namespace Kreta.Backend.Datas.Entities
+﻿namespace Kreta.Shared.Models.SchoolCitizens
 {
-    public class Student
+    public class Student : IDbEntity<Student>
     {
         public Student(Guid id, string firstName, string lastName, DateTime birthsDay, int schoolYear, SchoolClassType schoolClass, string educationLevel, bool isWooman)
         {

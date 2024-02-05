@@ -1,4 +1,4 @@
-﻿using Kreta.Backend.Datas.Entities;
+﻿using Kreta.Shared.Models.SchoolCitizens;
 using Kreta.Shared.Responses;
 
 namespace Kreta.Backend.Repos

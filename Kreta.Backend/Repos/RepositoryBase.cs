@@ -63,7 +63,8 @@ namespace Kreta.Backend.Repos
             
             if (entity is null || (entityToDelete is not null && !entityToDelete.HasId))
             {
-                response.AppendNewError($"{entity.Id} idével rendelkező entitás nem található!");
+                if (entity is not null )
+                    response.AppendNewError($"{entity.Id} idével rendelkező entitás nem található!");
                 response.AppendNewError("Az entitás törlése nem sikerült!");
             }
             else
