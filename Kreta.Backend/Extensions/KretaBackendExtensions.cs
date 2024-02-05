@@ -23,13 +23,13 @@ namespace Kreta.Backend.Extensions
 
         public static void ConfigureInMemoryContext(this IServiceCollection services)
         {
-            string dbNameInMemoryContext = "Kreta" + Guid.NewGuid();
-            services.AddDbContext<KretaInMemoryContext>
-            (
-                 options => options.UseInMemoryDatabase(databaseName: dbNameInMemoryContext),
-                 ServiceLifetime.Scoped,
-                 ServiceLifetime.Scoped
-            );
+            string dbName = "Kreta" + Guid.NewGuid();
+            /*services.AddDbContextFactory<KretaContext>(
+                options => options.UseInMemoryDatabase(databaseName: dbName)
+                );*/
+            services.AddDbContextFactory<KretaInMemoryContext>(
+                options => options.UseInMemoryDatabase(databaseName: dbName)
+                );
         }
 
         public static void ConfigureRepoService(this IServiceCollection services)
