@@ -72,5 +72,22 @@ namespace Kreta.Backend.Repos
                 return await InsertNewItemAsync(student);
             }
         }
+
+        private async Task<ControllerResponse> InsertNewItemAsync(Student student)
+        {
+            ControllerResponse response = new ControllerResponse();
+            try
+            {
+                _dbContext.Students.Add(student);
+                await _dbContext.SaveChangesAsync();
+            }
+            catch (Exception e)
+            {
+                response.AppendNewError(e.Message);
+                response.AppendNewError($"{nameof(StudentRepo)} osztály, {nameof(InsertNewItemAsync)} metódusban hiba keletkezett");
+                response.AppendNewError($"{student} osztály hozzáadása az adatbázishoz nem sikerült!");
+            }
+            return response;
+        }
     }
 }
